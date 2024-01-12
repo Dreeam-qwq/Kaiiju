@@ -21,10 +21,10 @@ index 601b9867d839f4928ba993ee8f00df9c330a0fe3..e7ee85b09aa4438868e068551280b13e
      }
  }
 diff --git a/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java b/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
-index b9e3c9cd709d42bced85436720ccc7b9c7e49552..5e6d64408a5da3f337d32bb8ac5ac2532b04490c 100644
+index ab5d25e2e1e86804c91885739c4f86770c40143c..40fd363377ee214289e25ec0197d472a8528033c 100644
 --- a/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
-@@ -125,6 +125,7 @@ public class TrapDoorBlock extends HorizontalDirectionalBlock implements SimpleW
+@@ -154,6 +154,7 @@ public class TrapDoorBlock extends HorizontalDirectionalBlock implements SimpleW
                  }
                  // CraftBukkit end
                  boolean open = (Boolean) state.getValue(TrapDoorBlock.OPEN) != flag1; // Paper - break redstone on trapdoors early
@@ -32,7 +32,7 @@ index b9e3c9cd709d42bced85436720ccc7b9c7e49552..5e6d64408a5da3f337d32bb8ac5ac253
                  // Paper start - break redstone on trapdoors early
                  // note: this must run before any state for this block/its neighborus are written to the world
                  // we allow the redstone event to fire so that plugins can block
-@@ -143,6 +144,7 @@ public class TrapDoorBlock extends HorizontalDirectionalBlock implements SimpleW
+@@ -172,6 +173,7 @@ public class TrapDoorBlock extends HorizontalDirectionalBlock implements SimpleW
                      }
                  }
                  // Paper end - break redstone on trapdoors early

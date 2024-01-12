@@ -22,15 +22,15 @@ index 6d7356cc07da58b1cef8d8963e790251d765de2c..601b9867d839f4928ba993ee8f00df9c
  
      public boolean fixVoidTrading = true;
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index a22ead3838417b654dbca3d97e0f0855d995006e..89132f4566d6daac74cf4ccf810e357bb374b6fc 100644
+index fd6f69f4b28775df660204238733ded880e17627..f9d2d07722c7d8cf84cef5c1c51192b151278189 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -942,7 +942,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
-         this.timings.doSounds.stopTiming(); // Spigot
+@@ -964,7 +964,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+ 
          regionizedWorldData.setHandlingTick(false); // Folia - regionised ticking
          gameprofilerfiller.pop();
--        boolean flag = true || !this.players.isEmpty() || !this.getForcedChunks().isEmpty(); // CraftBukkit - this prevents entity cleanup, other issues on servers with no players
-+        boolean flag = kaiijuConfig.tickWhenEmpty || !this.players.isEmpty() || !this.getForcedChunks().isEmpty(); // CraftBukkit - this prevents entity cleanup, other issues on servers with no players // Kaiiju - i don't think so
+-        boolean flag1 = true || !this.players.isEmpty() || !this.getForcedChunks().isEmpty(); // CraftBukkit - this prevents entity cleanup, other issues on servers with no players
++        boolean flag1 = kaiijuConfig.tickWhenEmpty || !this.players.isEmpty() || !this.getForcedChunks().isEmpty(); // CraftBukkit - this prevents entity cleanup, other issues on servers with no players // Kaiiju - i don't think so
  
-         if (flag) {
+         if (flag1) {
              this.resetEmptyTime();

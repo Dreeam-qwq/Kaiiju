@@ -21,14 +21,14 @@ index 59b41c29f42072ec2d3ba03b09e0ead897800ee1..b11a329ead2347917d24d932c9a1a826
  
      public static String serverModName = "Kaiiju";
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 42ff3d94ee451ced69c1059f0dbd45085489a60d..374dc5fd0ad15ace5314f2b9c675d1770a43f45a 100644
+index 3d2b059254fdc08d1e4f9281946028a46884d7c8..157158bb002ee4e81ea23eb3fa7a545ce309a1c3 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -2144,6 +2144,7 @@ public class ServerPlayer extends Player {
+@@ -2252,6 +2252,7 @@ public class ServerPlayer extends Player {
  
      @Override
      public void awardStat(Stat<?> stat, int amount) {
 +        if (dev.kaiijumc.kaiiju.KaiijuConfig.disablePlayerStats) return; // Kaiiju - Disable player stats
          this.stats.increment(this, stat, amount);
-         this.level().getCraftServer().getScoreboardManager().getScoreboardScores(stat, this.getScoreboardName(), (scoreboardscore) -> { // CraftBukkit - Get our scores instead
-             scoreboardscore.add(amount);
+         this.level().getCraftServer().getScoreboardManager().forAllObjectives(stat, this, (scoreaccess) -> {
+             scoreaccess.add(amount);

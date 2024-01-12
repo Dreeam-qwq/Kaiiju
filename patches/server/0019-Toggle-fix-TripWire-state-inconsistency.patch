@@ -22,10 +22,10 @@ index e7ee85b09aa4438868e068551280b13e84cdfdb8..8d7821d8b1a3615eaef1073d9dab6905
      }
  }
 diff --git a/src/main/java/net/minecraft/world/level/block/TripWireBlock.java b/src/main/java/net/minecraft/world/level/block/TripWireBlock.java
-index cb2ff8d94308c637a498d2737f86f6af4c9c1b83..84c407dfd19924d12f1c25addbb613e607445fd9 100644
+index 2f947997ca746d18544940ef67ff550a95946edd..de9a71825ee9c1ce77b77876edf8428c3c376965 100644
 --- a/src/main/java/net/minecraft/world/level/block/TripWireBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/TripWireBlock.java
-@@ -78,7 +78,7 @@ public class TripWireBlock extends Block {
+@@ -91,7 +91,7 @@ public class TripWireBlock extends Block {
      public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
          if (io.papermc.paper.configuration.GlobalConfiguration.get().blockUpdates.disableTripwireUpdates) return; // Paper - prevent adjacent tripwires from updating
          if (!moved && !state.is(newState.getBlock())) {

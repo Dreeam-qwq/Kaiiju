@@ -5,10 +5,10 @@ Subject: [PATCH] Use Math.floor instead of fastfloor
 
 
 diff --git a/src/main/java/io/papermc/paper/util/MCUtil.java b/src/main/java/io/papermc/paper/util/MCUtil.java
-index 2d6fc460c850c6d515794d2fa29324a448a985d1..d86355506a216389642d00bc0e0c6718ee2d0486 100644
+index 1f0ec6add54b7503415d5f4141fe2b6046f1ec69..7d159eee2d40fac6a0bf9fc55c092cde6e667e26 100644
 --- a/src/main/java/io/papermc/paper/util/MCUtil.java
 +++ b/src/main/java/io/papermc/paper/util/MCUtil.java
-@@ -166,13 +166,19 @@ public final class MCUtil {
+@@ -165,13 +165,19 @@ public final class MCUtil {
      }
  
      public static int fastFloor(double x) {

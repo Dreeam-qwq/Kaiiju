@@ -25,10 +25,10 @@ index c9830912019079369268bfbf2c95de18ad598f52..e2fb7d7a7b3126d386b46442c115085d
  
      public boolean fixVoidTrading = true;
 diff --git a/src/main/java/net/minecraft/world/entity/animal/Dolphin.java b/src/main/java/net/minecraft/world/entity/animal/Dolphin.java
-index 8448c5d778998390cf2b683f36e4e18ca7ffdc34..8438ae5194bba7cad22af5e350c5a288529cbcdb 100644
+index e555fd8ca61e1ce7a52ecd475cc3ea11dedcab08..6725889c9f939e6aff09ac2590d19ee829896a74 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/Dolphin.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/Dolphin.java
-@@ -164,7 +164,7 @@ public class Dolphin extends WaterAnimal {
+@@ -159,7 +159,7 @@ public class Dolphin extends WaterAnimal {
      protected void registerGoals() {
          this.goalSelector.addGoal(0, new BreathAirGoal(this));
          this.goalSelector.addGoal(0, new TryFindWaterGoal(this));

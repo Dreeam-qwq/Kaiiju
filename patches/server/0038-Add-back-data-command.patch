@@ -5,10 +5,10 @@ Subject: [PATCH] Add back data command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 21e2a55c3c9023718f51fdb2d3a321eceb2aa7ca..034c64df1fd1f58a01535183753f94899c50df2b 100644
+index 4a37225682c3fbc91033da7a0d2800a33d793739..f8bb828717e9038b520f375edcb1a60462ebc72e 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -150,7 +150,7 @@ public class Commands {
+@@ -163,7 +163,7 @@ public class Commands {
          ClearInventoryCommands.register(this.dispatcher, commandRegistryAccess);
          //CloneCommands.register(this.dispatcher, commandRegistryAccess); // Folia - region threading - TODO
          DamageCommand.register(this.dispatcher, commandRegistryAccess);

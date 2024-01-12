@@ -5,7 +5,7 @@ Subject: [PATCH] Entity ticking throttling & removal to prevent lag.
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index e4f44b569e3df53a786cc178a0496f59715bbd09..2c37e718fbb5d2de6e1568951ff97f65592d23b8 100644
+index c951f52c8da27dbd6be5e34fe048e054f37fcd62..372b43b27e1f0a411b1d6f45770a72ceb761f824 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -23,6 +23,7 @@ dependencies {
@@ -270,7 +270,7 @@ index 8d7821d8b1a3615eaef1073d9dab690559b85f81..816db23fa64aab69e3034484c00645eb
  
      public boolean fixVoidTrading = true;
 diff --git a/src/main/java/dev/kaiijumc/kaiiju/command/KaiijuCommand.java b/src/main/java/dev/kaiijumc/kaiiju/command/KaiijuCommand.java
-index 9cc00523fce7295229df1b417827c7f4f69545a6..1dfe74e898c4154cebee79c4613d0e461d81201c 100644
+index 6fac162e0ec057af9f3336314d5663554cef0490..efecc7e132c67577577c99bfcf98e2b4ddae14ab 100644
 --- a/src/main/java/dev/kaiijumc/kaiiju/command/KaiijuCommand.java
 +++ b/src/main/java/dev/kaiijumc/kaiiju/command/KaiijuCommand.java
 @@ -1,6 +1,7 @@
@@ -302,7 +302,7 @@ index 7ca275826609bcf96f103a8c50beaa47c3b4068b..e895fad608e3a166cf9c800f16edb59b
      // block ticking
      private final ObjectLinkedOpenHashSet<BlockEventData> blockEvents = new ObjectLinkedOpenHashSet<>();
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 420f35e06da504d52b535cb6e4c6fe0bc866f9b4..3b921b4404452365bfecae450563c4b613646b8b 100644
+index 69db11600c5675c611cc57a8e6804b785288b1d0..170edc0aee5a7070e53442594b92392757214827 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -225,6 +225,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -319,10 +319,10 @@ index 420f35e06da504d52b535cb6e4c6fe0bc866f9b4..3b921b4404452365bfecae450563c4b6
          dev.kaiijumc.kaiiju.KaiijuConfig.registerCommands();
          // Kaiiju end
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 89132f4566d6daac74cf4ccf810e357bb374b6fc..e060e9adacd68c128e1e5fd7880269492e25bd34 100644
+index f9d2d07722c7d8cf84cef5c1c51192b151278189..a6dcfc561feab617dfdaba78abd8c274646c13a5 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
-@@ -968,6 +968,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -990,6 +990,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
                  } finally { profiler.stopTimer(ca.spottedleaf.leafprofiler.LProfilerRegistry.DRAGON_FIGHT_TICK); } // Folia - profiler
              }
  
@@ -330,7 +330,7 @@ index 89132f4566d6daac74cf4ccf810e357bb374b6fc..e060e9adacd68c128e1e5fd788026949
              org.spigotmc.ActivationRange.activateEntities(this); // Spigot
              this.timings.entityTick.startTiming(); // Spigot
              profiler.startTimer(ca.spottedleaf.leafprofiler.LProfilerRegistry.ENTITY_TICK); try { // Folia - profiler
-@@ -991,6 +992,13 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -1013,6 +1014,13 @@ public class ServerLevel extends Level implements WorldGenLevel {
                                  entity.stopRiding();
                              }
  
@@ -344,7 +344,7 @@ index 89132f4566d6daac74cf4ccf810e357bb374b6fc..e060e9adacd68c128e1e5fd788026949
                              gameprofilerfiller.push("tick");
                              this.guardEntityTick(this::tickNonPassenger, entity);
                              gameprofilerfiller.pop();
-@@ -999,6 +1007,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -1021,6 +1029,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
                  }
              });
              } finally { profiler.stopTimer(ca.spottedleaf.leafprofiler.LProfilerRegistry.ENTITY_TICK); } // Folia - profiler
@@ -353,10 +353,10 @@ index 89132f4566d6daac74cf4ccf810e357bb374b6fc..e060e9adacd68c128e1e5fd788026949
              this.timings.tickEntities.stopTiming(); // Spigot
              gameprofilerfiller.pop();
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index d0c1d941be9b08b6951cac32850c78634b6e347c..8c9b125eb0e20002d86576bbabd5b4c1d487b0fe 100644
+index 7f74d486535376e86e9c7bb9c9da3aa2f71f4c43..13e8492134f4001a011bf1a56ef083b1e8e4fb6f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
-@@ -179,6 +179,11 @@ public class Main {
+@@ -180,6 +180,11 @@ public class Main {
                      .ofType(File.class)
                      .defaultsTo(new File("kaiiju.yml"))
                      .describedAs("Yml file");

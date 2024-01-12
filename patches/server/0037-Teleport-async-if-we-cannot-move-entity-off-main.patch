@@ -26,10 +26,10 @@ index e2fb7d7a7b3126d386b46442c115085d1974ac4e..44f5540a6a5733cf6f10f6b04fc9611a
      }
  }
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 242d2ce71d9f194423fa7b28c3af04031278e51d..428e86de102fb0b5a6518ad2a19fd1cd8a326cb6 100644
+index 3e39087e475b9d35cd2531dcdb8a5b5d88857f24..b76ac0a7fceac384cf2a556db039f1f351a7f100 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -1127,7 +1127,20 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -1135,7 +1135,20 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
                      }
                  }
  
@@ -50,7 +50,7 @@ index 242d2ce71d9f194423fa7b28c3af04031278e51d..428e86de102fb0b5a6518ad2a19fd1cd
              }
  
              this.level().getProfiler().pop();
-@@ -3931,13 +3944,15 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -3985,13 +3998,15 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
          // check for same region
          if (destination == this.level()) {
              Vec3 currPos = this.position();

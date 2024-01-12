@@ -5,10 +5,10 @@ Subject: [PATCH] Don't spam recipe changes on update
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-index e38e2e5a7ddba9c140f362021b6be0b0974f7cd1..4cb589f03a7652238e70a9ef76c8cafd84ecc5d6 100644
+index f655e0ae4a287886d0291cd0089bad2000249d0f..285bb34b4ed45308292c5a23322f15b838552ac4 100644
 --- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
 +++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-@@ -200,7 +200,7 @@ public class PlayerAdvancements {
+@@ -199,7 +199,7 @@ public class PlayerAdvancements {
  
              if (advancementholder == null) {
                  if (!minecraftkey.getNamespace().equals("minecraft")) return; // CraftBukkit
